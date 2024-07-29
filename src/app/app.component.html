@@ -1,8 +1,20 @@
 <app-header/>
 <main>
     <ul id="users">
-        <li>
-            <app-user />
-        </li>
+        @for(user of users; track user.id){
+            <li>
+                <app-user 
+                    [user]="user"  
+                    (select) = "onSelectUserComp($event)"
+                />
+            </li>
+        }
     </ul>
+    @if(currUser){
+        <app-tasks [username]="currUser.name" />
+    }
+
+    @else {
+        <h2>Select a user!</h2>
+    }
 </main>
