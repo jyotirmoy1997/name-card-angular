@@ -1,8 +1,11 @@
 <section id="tasks">
+    @if(isTaskAvailable){
+        <app-new-task (cancel)="hideTask()" (formData)="addTask($event)"  />
+    }
     <header>
-        <h2>{{ selectedUser?.name }}'s Tasks</h2>
+        <h2>{{ selectedUser.name }}'s Tasks</h2>
         <menu>
-            <button>Add Task</button>
+            <button (click)="showTask()">Add Task</button>
         </menu>
     </header>
     <ul>

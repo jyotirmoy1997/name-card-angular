@@ -12,5 +12,11 @@ interface Task {
     dueDate: string,
 }
 
+interface FormData{
+    title : string,
+    summary : string,
+    date : string
+}
 
-export { User, Task }
+
+export { User, Task, FormData }
