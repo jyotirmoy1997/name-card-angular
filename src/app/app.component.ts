@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { DUMMY_USERS } from './dummy-users';
@@ -15,10 +15,9 @@ import { User } from './types';
 export class AppComponent {
   users = DUMMY_USERS
   currUser : User | undefined
-
+  // s
 
   onSelectUserComp(id : string){
-    console.log(this.currUser)
     const currUserProf = DUMMY_USERS.find(( user => user.id === id))
     this.currUser = currUserProf
   }
