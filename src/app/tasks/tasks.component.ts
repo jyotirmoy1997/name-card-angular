@@ -3,6 +3,7 @@ import { TaskComponent } from "./task/task.component";
 import { dummyTasks } from '../dummy-tasks';
 import { FormData, Task, User } from '../types';
 import { NewTaskComponent } from './new-task/new-task.component';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -13,15 +14,16 @@ import { NewTaskComponent } from './new-task/new-task.component';
 })
 export class TasksComponent {
   @Input({required : true}) selectedUser! : User
-  tasks : Task[] = dummyTasks
   isTaskAvailable = false
 
+  constructor(private tasksService : TasksService){}
+
   get selectedUserTasks(){
-    return this.tasks.filter(task => task.userId === this.selectedUser?.id)
+    return this.tasksService.getUserTasks(this.selectedUser.id)
   }
 
   deleteTask(id : string){
-    this.tasks = this.tasks.filter((task) => task.id !== id)
+    return this.tasksService.deleteTask(id)
   }
 
   showTask(){
@@ -33,13 +35,7 @@ export class TasksComponent {
   }
 
   addTask(newTask : FormData){
-    this.tasks.push({
-      id : 't4',
-      userId : this.selectedUser.id,
-      title : newTask.title,
-      summary : newTask.summary,
-      dueDate : newTask.date
-    })
+    this.tasksService.addNewTask(newTask, this.selectedUser.id)
     this.isTaskAvailable = false
   }
 }
